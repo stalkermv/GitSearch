@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C8C0C8C26F6AAAA007C1578 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6C8C0C8B26F6AAAA007C1578 /* README.md */; };
 		6CE3514326F6537900A4074A /* HistoryStateBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE3514226F6537900A4074A /* HistoryStateBinder.swift */; };
 		6CE3514526F65A2C00A4074A /* HistoryActionBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE3514426F65A2C00A4074A /* HistoryActionBinder.swift */; };
 		6CE3514726F65B9D00A4074A /* ObservableType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE3514626F65B9D00A4074A /* ObservableType+Extensions.swift */; };
@@ -72,6 +73,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C8C0C8B26F6AAAA007C1578 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6CE3514226F6537900A4074A /* HistoryStateBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStateBinder.swift; sourceTree = "<group>"; };
 		6CE3514426F65A2C00A4074A /* HistoryActionBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryActionBinder.swift; sourceTree = "<group>"; };
 		6CE3514626F65B9D00A4074A /* ObservableType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Extensions.swift"; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 		6CF0AC9A26F0A7BE0088BF87 = {
 			isa = PBXGroup;
 			children = (
+				6C8C0C8B26F6AAAA007C1578 /* README.md */,
 				6CF0ACA526F0A7BE0088BF87 /* GitSearch */,
 				6CF0ACA426F0A7BE0088BF87 /* Products */,
 			);
@@ -411,6 +414,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C8C0C8C26F6AAAA007C1578 /* README.md in Resources */,
 				6CF0ACB326F0A7BF0088BF87 /* LaunchScreen.storyboard in Resources */,
 				6CE3514F26F66CB900A4074A /* HistoryTableViewCell.xib in Resources */,
 				6CF0AD0626F387810088BF87 /* RepositorySearchTableViewCell.xib in Resources */,

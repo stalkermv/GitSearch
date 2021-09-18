@@ -23,38 +23,52 @@ final class GithubAPI: GithubAPIProvider {
     }
 
     private let httpClient: HTTPClientProvider
-    private var nextCursor: (() -> Observable<[Repository]>)?
+    private var nextCursor: Cursor?
 
     init(httpClient: HTTPClientProvider) {
         self.httpClient = httpClient
     }
 
     func searchRepositories(forQuery query: String) -> Observable<[Repository]> {
-        searchRepositories(for: query, page: 1)
+        multiThreadingWrapper(query: query)
     }
 
     func loadNextResults() -> Observable<[Repository]> {
-        guard let nextCursor = nextCursor?() else {
+        guard let nextCursor = nextCursor else {
             return Observable.just([])
         }
 
-        return nextCursor
+        return multiThreadingWrapper(query: nextCursor.query, page: nextCursor.page)
+    }
+
+    private func multiThreadingWrapper(query: String, page: Int = 1) -> Observable<[Repository]> {
+        let internalPagingNextPage = page * 2
+        nextCursor = Cursor(query: query, page: page + 1)
+        
+        return Observable.zip(
+            searchRepositories(for: query, page: internalPagingNextPage - 1),
+            searchRepositories(for: query, page: internalPagingNextPage),
+            resultSelector: { $0 + $1 }
+        )
     }
 
     private func searchRepositories(
         for query: String,
-        page: Int = 0
+        page: Int = 1
     ) -> Observable<[Repository]> {
-        nextCursor = { self.searchRepositories(for: query, page: page + 1) }
-
-        return httpClient.get(
+        httpClient.get(
             url: Constants.baseURL +
             Constants.repositorySearchEndpoint +
-            "?q=\(query)&sort=stars&page=\(page)"
+            "?q=\(query)&sort=stars&page=\(page)&per_page=15"
         )
         .unwrap()
         .decode(type: GithubRepositorySearchResponse.self, decoder: JSONDecoder())
         .map(\.items)
+    }
+
+    private struct Cursor {
+        let query: String
+        let page: Int
     }
 }
 
